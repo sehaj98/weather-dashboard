@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Current weather and five-day forecast for cities around the world.">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="dashboard">
+        <header class="header">
+            <div class="brand">
+                <span class="brand-icon" aria-hidden="true">☀</span>
+                <span>Weather Dashboard</span>
+            </div>
+            <span class="status">YOUR WEATHER, SIMPLIFIED</span>
+        </header>
+
+        <section class="hero">
+            <p class="eyebrow">WEATHER AT A GLANCE</p>
+            <h1>Find your city's weather.</h1>
+            <p class="subtitle">
+                Search a city to see current conditions and the five-day forecast.
+            </p>
+
+            <form class="search-form" method="POST" action="/">
+                <label class="visually-hidden" for="city">City name</label>
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="Enter a city, e.g. Amritsar"
+                    value="{{ city }}"
+                    maxlength="80"
+                    required
+                >
+                <button type="submit">Search weather <span aria-hidden="true">→</span></button>
+            </form>
+
+            {% if message %}
+                <div class="message" role="status">{{ message }}</div>
+            {% endif %}
+        </section>
+
+        {% if weather %}
+        <section class="preview">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">YOUR DASHBOARD</p>
+                    <h2>Current weather</h2>
+                </div>
+                <span class="preview-label">LIVE DATA</span>
+            </div>
+
+            <div class="weather-card">
+                <div class="weather-top">
+                    <div>
+                        <p class="muted">CURRENT CONDITIONS</p>
+                        <h3>
+                            {{ weather.city }}{% if weather.region %}, {{ weather.region }}{% endif %}
+                        </h3>
+                        <p class="muted">{{ weather.country }}</p>
+                        <p class="condition">{{ weather.condition }}</p>
+                    </div>
+                    <div class="temperature">
+                        {{ weather.temperature }}<span>{{ weather.temperature_unit }}</span>
+                    </div>
+                </div>
+
+                <p class="feels-like">
+                    Feels like {{ weather.feels_like }}{{ weather.temperature_unit }}
+                </p>
+
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-icon" aria-hidden="true">💧</span>
+                        <span class="stat-label">Humidity</span>
+                        <strong>{{ weather.humidity }}%</strong>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon" aria-hidden="true">💨</span>
+                        <span class="stat-label">Wind speed</span>
+                        <strong>{{ weather.wind_speed }} {{ weather.wind_unit }}</strong>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon" aria-hidden="true">🌡️</span>
+                        <span class="stat-label">Temperature</span>
+                        <strong>{{ weather.temperature }}{{ weather.temperature_unit }}</strong>
+                    </div>
+                </div>
+
+                <p class="note">Local observation time: {{ weather.time }}</p>
+            </div>
+        </section>
+
+        <section class="forecast-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">PLAN AHEAD</p>
+                    <h2>5-day forecast</h2>
+                </div>
+                <span class="preview-label">DAILY OUTLOOK</span>
+            </div>
+
+            <div class="forecast-grid">
+                {% for day in forecast %}
+                <article class="forecast-card">
+                    <p class="forecast-date">{{ day.date }}</p>
+                    <div class="forecast-icon" aria-hidden="true">
+                        {% if "Thunderstorm" in day.condition %}
+                            ⛈️
+                        {% elif "rain" in day.condition|lower or "drizzle" in day.condition|lower %}
+                            🌧️
+                        {% elif "snow" in day.condition|lower %}
+                            ❄️
+                        {% elif "fog" in day.condition|lower %}
+                            🌫️
+                        {% elif "cloud" in day.condition|lower or "overcast" in day.condition|lower %}
+                            ☁️
+                        {% else %}
+                            ☀️
+                        {% endif %}
+                    </div>
+                    <p class="forecast-condition">{{ day.condition }}</p>
+                    <div class="forecast-temperatures">
+                        <strong>{{ day.high }}{{ day.temperature_unit }}</strong>
+                        <span>{{ day.low }}{{ day.temperature_unit }}</span>
+                    </div>
+                    <p class="rain-chance">
+                        💧 Rain chance:
+                        {% if day.rain is not none %}
+                            {{ day.rain }}%
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </p>
+                </article>
+                {% endfor %}
+            </div>
+
+            <p class="note">
+                Forecast data provided by
+                <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>.
+                Forecasts are estimates and may change.
+            </p>
+        </section>
+        {% else %}
+        <section class="preview">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">YOUR DASHBOARD</p>
+                    <h2>Weather overview</h2>
+                </div>
+                <span class="preview-label">READY TO SEARCH</span>
+            </div>
+            <div class="weather-card">
+                <div class="weather-top">
+                    <div>
+                        <p class="muted">CURRENT CONDITIONS</p>
+                        <h3>Ready to explore?</h3>
+                        <p class="muted">Search for a city to see current weather and a five-day forecast.</p>
+                    </div>
+                    <div class="weather-symbol" aria-hidden="true">🌤️</div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <footer>
+            Built with Python and Flask · Weather data by Open-Meteo
+        </footer>
+    </main>
+</body>
+</html>
