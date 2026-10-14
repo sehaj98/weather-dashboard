@@ -1,108 +1,163 @@
+# 🌦️ Weather Dashboard
 
-# Weather Dashboard 🌦️
+A Python Flask web application that displays real-time weather information and a five-day weather forecast for cities around the world.
 
-A responsive weather dashboard built with Python and Flask.
-Search for a city to view current weather conditions and a
-five-day forecast.
+Users can search for a city to view current weather conditions, temperature, humidity, wind speed, and upcoming forecasts through a clean and responsive interface.
 
-## Features
+## 📸 Screenshot
 
-- Search weather by city name
-- Current temperature and feels-like temperature
-- Humidity and wind speed
-- Current weather conditions
-- Five-day temperature forecast
-- Daily chance of precipitation
-- Input validation and API error handling
-- Automated tests using pytest
-- Responsive layout for mobile and desktop
+![Weather Dashboard](screenshots/weather-dashboard.png)
 
-## Tech Stack
+## ✨ Features
 
-- Python
-- Flask
-- HTML5
-- CSS3
-- Open-Meteo Geocoding API
-- Open-Meteo Weather API
-- pytest
+- 🔍 **City Search:** Search for weather information by city name.
+- 🌡️ **Current Weather:** View current temperature and weather conditions.
+- 💧 **Humidity Information:** Check the current humidity level.
+- 💨 **Wind Speed:** View current wind speed.
+- 📅 **Five-Day Forecast:** Explore upcoming weather conditions and daily temperatures.
+- 🌤️ **Weather Descriptions:** Display readable descriptions of weather conditions.
+- 📱 **Responsive Design:** Use the dashboard on desktop and mobile screens.
+- ⚠️ **Error Handling:** Handle invalid city names and weather service connection errors.
+- 🧪 **Automated Tests:** Verify application functionality using pytest.
 
-## Project Structure
+## 🛠️ Technologies Used
+
+- **Python** — Application logic and weather data processing
+- **Flask** — Web framework
+- **HTML5** — Page structure
+- **CSS3** — Styling and responsive layout
+- **Open-Meteo API** — Weather forecasts and current weather data
+- **pytest** — Automated testing
+- **Git & GitHub** — Version control and project hosting
+
+## 📂 Project Structure
 
 ```text
 weather-dashboard/
+│
 ├── app.py
 ├── requirements.txt
 ├── README.md
-├── templates/
-│   └── index.html
+├── .gitignore
+│
+├── screenshots/
+│   └── weather-dashboard.png
+│
 ├── static/
 │   └── style.css
+│
+├── templates/
+│   └── index.html
+│
 └── tests/
     └── test_app.py
 ```
 
-## Getting Started
+## ⚙️ Installation and Setup
 
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/YOUR-USERNAME/weather-dashboard.git
+```
+
+Replace `YOUR-USERNAME` with your GitHub username.
+
+### 2. Navigate to the project directory
+
+```bash
 cd weather-dashboard
 ```
 
-Replace `YOUR_GITHUB_REPOSITORY_URL` with your repository URL.
+### 3. Create a virtual environment
 
-### 2. Create a virtual environment
-
-Windows PowerShell:
+**Windows PowerShell:**
 
 ```powershell
 python -m venv .venv
+```
+
+### 4. Activate the virtual environment
+
+```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
+If PowerShell blocks activation, you can use Command Prompt instead:
 
-```powershell
+```cmd
+.venv\Scripts\activate.bat
+```
+
+### 5. Install dependencies
+
+```bash
 python -m pip install -r requirements.txt
 ```
 
-### 4. Run the application
+## ▶️ Run the Application
 
-```powershell
+Start the Flask development server:
+
+```bash
 python app.py
 ```
 
-Open this address in your browser:
+Open your browser and visit:
 
-http://127.0.0.1:5000
+**http://127.0.0.1:5000**
 
-## Run Tests
+Enter a city name to view current weather conditions and the five-day forecast.
 
-```powershell
+To stop the server, press `Ctrl + C` in the terminal.
+
+## 🧪 Run Tests
+
+Run the automated test suite from the project root:
+
+```bash
 python -m pytest -v
 ```
 
-The tests cover page loading, input validation, successful
-weather searches, invalid cities, and API connection errors.
+The tests help verify application behavior and error handling.
 
-## Weather Data
+## 🌐 Weather Data Source
 
-Weather information is provided by Open-Meteo:
+This application uses [Open-Meteo](https://open-meteo.com/) to retrieve weather data and forecasts.
 
-- https://open-meteo.com/
+Open-Meteo provides weather APIs that can be used without an API key for eligible non-commercial use. Please review its [documentation](https://open-meteo.com/en/docs) and [terms](https://open-meteo.com/en/terms) before using the service for other purposes.
 
-No API key is required for this project's basic API usage.
+## 🎯 Learning Outcomes
 
-## Future Improvements
+Building this project provided practical experience with:
 
-- Weather icons and improved visual design
-- Unit conversion between Celsius and Fahrenheit
-- Weather forecast charts
-- Deployment to a hosting platform
-- Continuous integration for automated tests
+- Developing a web application using Flask
+- Integrating an external weather API
+- Processing JSON responses in Python
+- Handling HTTP requests and connection errors
+- Building dynamic HTML templates with Jinja
+- Organizing a Python project into separate folders
+- Writing automated tests with pytest
+- Managing source code with Git and GitHub
 
-## License
+## 🚀 Future Improvements
 
-This project is available for learning and portfolio purposes.
+Potential enhancements include:
+
+- Weather icons and improved visualizations
+- Hourly weather forecasts
+- Search history and favorite cities
+- Temperature unit conversion between Celsius and Fahrenheit
+- Better accessibility and mobile styling
+- Deployment to a public hosting platform
+
+## 👨‍💻 Author
+
+**Sehajdeep Kaur**
+
+Python Developer | Learning Flask, API Integration, and Software Testing
+
+
+---
+
+*Built as a Python portfolio project to practice web development, API integration, and automated testing.*
